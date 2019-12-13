@@ -1,0 +1,22 @@
+{
+  "name": "empreendemanas",
+  "version": "1.0.0",
+  "description": "Projeto de conclusão do curso de Back-end da @reprograma",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grayceferreira/empreendemanas.git"
+  },
+  "author": "Grayce Ferreira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grayceferreira/empreendemanas/issues"
+  },
+  "homepage": "https://github.com/grayceferreira/empreendemanas#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

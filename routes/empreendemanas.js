@@ -62,4 +62,7 @@ const autenticarAdmin = (request, response, next) => {
   next()
 }
 
+router.get('', autenticar, controller.getAll)
+router.post('', autenticar, controller.newEmpreendemana)
+
 module.exports = router

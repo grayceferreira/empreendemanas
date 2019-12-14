@@ -7,6 +7,20 @@ const SEGREDO = 'MIICXAIBAAKBgQCOl54HaBM/WiL/jPPdFGjm9f8VprUst1J+vs7G/YRGRHYLGqt
 
 connect()
 
+const getAll = (request, response) => {
+  empreendemanasModel.find((error, empreendemanas) => {
+    if (error) {
+      return response.status(500).send(error)
+    }
+
+    return response.status(200).send(empreendemanas)
+  })
+}
+
+const newEmpreendemana = (request, response) => {
+  
+}
+
 module.exports = {
- 
+  getAll
   }

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { ServicosSchema } = require('.ServicosSchema')
+const { ServicosSchema } = require('./ServicosSchema')
 const Schema = mongoose.Schema;
 const EmpreendemanasSchema = new Schema({
   _id: { type: mongoose.Schema.Types.ObjectId, auto: true, required: true },

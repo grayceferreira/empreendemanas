@@ -66,5 +66,6 @@ router.get('', autenticar, controller.getAll)
 router.post('', autenticar, controller.newEmpreendemana)
 router.post('/administrador', autenticar, controller.newAdmin)
 router.delete('/:id', autenticar, controller.removeEmpreendemana)
+router.patch('/:id', autenticar, controller.update)
 
 module.exports = router

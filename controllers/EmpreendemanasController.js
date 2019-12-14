@@ -47,6 +47,29 @@ const newAdmin = (request, response) => {
   })
 }
 
+const update = (request, response) => {
+  const id = request.params.id
+  const updateEmpreendemana = request.body
+  const options = { new: true }
+
+  empreendemanasModel.findByIdAndUpdate(
+    id,
+    updateEmpreendemana,
+    options,
+    (error, empreendemana) => {
+      if (error) {
+        return response.status(500).send(error)
+      }
+
+      if (empreendemana) {
+        return response.status(200).send(empreendemana)
+      }
+
+      return response.status(404).send('Ooops! Empreendemana não encontrada.')
+    }
+  )
+}
+
 const removeEmpreendemana = (request, response) => {
   const id = request.params.id
 
@@ -68,5 +91,6 @@ module.exports = {
   getAll,
   newEmpreendemana,
   newAdmin,
-  removeEmpreendemana
+  removeEmpreendemana,
+  update
   }

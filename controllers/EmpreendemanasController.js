@@ -18,9 +18,21 @@ const getAll = (request, response) => {
 }
 
 const newEmpreendemana = (request, response) => {
-  
+  const senhaCriptografada = bcrypt.hashSync(request.body.senha)
+  request.body.senha = senhaCriptografada
+  request.body.permissao = 'comum'
+  const novaEmpreendemana = new empreendemanasModel(request.body)
+
+  novaEmpreendemana.save((error) => {
+    if (error) {
+      return response.status(500).send(error)
+    }
+
+    return response.status(201).send(novaEmpreendemana)
+  })
 }
 
 module.exports = {
-  getAll
+  getAll,
+  newEmpreendemana
   }

@@ -35,7 +35,7 @@ const newEmpreendemana = (request, response) => {
 const newAdmin = (request, response) => {
   const senhaCriptografada = bcrypt.hashSync(request.body.senha)
   request.body.senha = senhaCriptografada
-  request.body.grupo = 'administrador'
+  request.body.permissao = 'administrador'
   const novaEmpreendemana = new empreendemanasModel(request.body)
 
   novaEmpreendemana.save((error) => {
@@ -45,6 +45,30 @@ const newAdmin = (request, response) => {
 
     return response.status(201).send(novaEmpreendemana)
   })
+}
+
+const login = async (request, response) => {
+  const empreendemanaEncontrada = await empreendemanasModel.findOne({ email: request.body.email })
+
+  if (empreendemanaEncontrada) {
+    const senhaCorreta = bcrypt.compareSync(request.body.senha, empreendemanaEncontrada.senha)
+
+    if (senhaCorreta) {
+      const token = jwt.sign(
+        {
+          permissao: empreendemanaEncontrada.permissao
+        },
+        SEGREDO,
+        { expiresIn: 6000 }
+      )
+
+      return response.status(200).send({ token })
+    }
+
+    return response.status(401).send('Mana, sua senha está incorreta!')
+  }
+
+  return response.status(404).send('Ooops! Empreendemana não encontrada.')
 }
 
 const update = (request, response) => {
@@ -92,5 +116,6 @@ module.exports = {
   newEmpreendemana,
   newAdmin,
   remove,
-  update
+  update,
+  login
   }

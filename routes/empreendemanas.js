@@ -18,7 +18,7 @@ const autenticar = (request, response, next) => {
     if (error) {
       autenticado = false
     } else {
-      if (decoded.grupo == 'comum' || decoded.grupo == 'admin') {
+      if (decoded.permissao == 'comum' || decoded.permissao == 'admin') {
         autenticado = true
       } else {
         autenticado = false
@@ -47,7 +47,7 @@ const autenticarAdmin = (request, response, next) => {
     if (error) {
       autenticado = false
     } else {
-      if (decoded.grupo == 'admin') {
+      if (decoded.permissao == 'admin') {
         autenticado = true
       } else {
         autenticado = false
@@ -67,5 +67,6 @@ router.post('', autenticar, controller.newEmpreendemana)
 router.post('/administrador', autenticar, controller.newAdmin)
 router.delete('/:id', autenticar, controller.remove)
 router.patch('/:id', autenticar, controller.update)
+router.post('/login', controller.login)
 
 module.exports = router

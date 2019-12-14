@@ -70,7 +70,7 @@ const update = (request, response) => {
   )
 }
 
-const removeEmpreendemana = (request, response) => {
+const remove = (request, response) => {
   const id = request.params.id
 
   empreendemanasModel.findByIdAndDelete(id, (error, empreendemana) => {
@@ -91,6 +91,6 @@ module.exports = {
   getAll,
   newEmpreendemana,
   newAdmin,
-  removeEmpreendemana,
+  remove,
   update
   }

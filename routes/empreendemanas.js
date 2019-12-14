@@ -65,7 +65,7 @@ const autenticarAdmin = (request, response, next) => {
 router.get('', autenticar, controller.getAll)
 router.post('', autenticar, controller.newEmpreendemana)
 router.post('/administrador', autenticar, controller.newAdmin)
-router.delete('/:id', autenticar, controller.removeEmpreendemana)
+router.delete('/:id', autenticar, controller.remove)
 router.patch('/:id', autenticar, controller.update)
 
 module.exports = router

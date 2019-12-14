@@ -47,9 +47,26 @@ const newAdmin = (request, response) => {
   })
 }
 
+const removeEmpreendemana = (request, response) => {
+  const id = request.params.id
+
+  empreendemanasModel.findByIdAndDelete(id, (error, empreendemana) => {
+    if (error) {
+      return response.status(500).send(error)
+    }
+
+    if (empreendemana) {
+      return response.status(200).send(id)
+    }
+
+    return response.status(404).send('Ooops! Não encontramos essa empreendemana.')
+  })
+}
+
 
 module.exports = {
   getAll,
   newEmpreendemana,
-  newAdmin
+  newAdmin,
+  removeEmpreendemana
   }

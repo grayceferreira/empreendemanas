@@ -47,8 +47,33 @@ const newAdmin = (request, response) => {
   })
 }
 
+const login = async (request, response) => {
+  const patrocinadorEncontrado = await patrocinadoresModel.findOne({ email: request.body.email })
+
+  if (patrocinadorEncontrado) {
+    const senhaCorreta = bcrypt.compareSync(request.body.senha, patrocinadorEncontrado.senha)
+
+    if (senhaCorreta) {
+      const token = jwt.sign(
+        {
+          permissao: patrocinadorEncontrado.permissao
+        },
+        SEGREDO,
+        { expiresIn: 6000 }
+      )
+
+      return response.status(200).send({ token })
+    }
+
+    return response.status(401).send('Patrocinador(a), sua senha está incorreta!')
+  }
+
+  return response.status(404).send('Ooops! Patrocinador não encontrado(a).')
+}
+
 module.exports = {
   getAll,
   newPatrocinador,
-  newAdmin
+  newAdmin,
+  login
   }

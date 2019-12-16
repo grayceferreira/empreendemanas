@@ -32,7 +32,23 @@ const newPatrocinador = (request, response) => {
   })
 }
 
+const newAdmin = (request, response) => {
+  const senhaCriptografada = bcrypt.hashSync(request.body.senha)
+  request.body.senha = senhaCriptografada
+  request.body.permissao = 'administrador'
+  const novoPatrocinadorAdm = patrocinadoresModel(request.body)
+
+  novoPatrocinadorAdm.save((error) => {
+    if (error) {
+      return response.status(500).send(error)
+    }
+
+    return response.status(201).send(novoPatrocinadorAdm)
+  })
+}
+
 module.exports = {
   getAll,
   newPatrocinador,
+  newAdmin
   }

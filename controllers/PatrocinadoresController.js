@@ -71,9 +71,33 @@ const login = async (request, response) => {
   return response.status(404).send('Ooops! Patrocinador não encontrado(a).')
 }
 
+const update = (request, response) => {
+  const id = request.params.id
+  const updatePatrocinador = request.body
+  const options = { new: true }
+
+  patrocinadoresModel.findByIdAndUpdate(
+    id,
+    updatePatrocinador,
+    options,
+    (error, patrocinador) => {
+      if (error) {
+        return response.status(500).send(error)
+      }
+
+      if (patrocinador) {
+        return response.status(200).send(patrocinador)
+      }
+
+      return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
+    }
+  )
+}
+
 module.exports = {
   getAll,
   newPatrocinador,
   newAdmin,
-  login
+  login,
+  update
   }

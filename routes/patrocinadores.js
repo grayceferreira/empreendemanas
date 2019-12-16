@@ -62,4 +62,6 @@ const autenticarAdmin = (request, response, next) => {
   next()
 }
 
+router.get('patrocinador', autenticar, controller.getAll)
+
 module.exports = router

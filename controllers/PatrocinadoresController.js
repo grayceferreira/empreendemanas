@@ -17,7 +17,22 @@ const getAll = (request, response) => {
   })
 }
 
+const newPatrocinador = (request, response) => {
+  const senhaCriptografada = bcrypt.hashSync(request.body.senha)
+  request.body.senha = senhaCriptografada
+  request.body.permissao = 'comum'
+  const novoPatrocinador = new patrocinadoresModel(request.body)
+
+  novoPatrocinador.save((error) => {
+    if (error) {
+      return response.status(500).send(error)
+    }
+
+    return response.status(201).send(novoPatrocinador)
+  })
+}
 
 module.exports = {
-  getAll
+  getAll,
+  newPatrocinador,
   }

@@ -63,5 +63,6 @@ const autenticarAdmin = (request, response, next) => {
 }
 
 router.get('patrocinador', autenticar, controller.getAll)
+router.post('patrocinador', autenticar, controller.newPatrocinador)
 
 module.exports = router

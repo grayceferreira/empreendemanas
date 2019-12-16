@@ -64,7 +64,7 @@ const autenticarAdmin = (request, response, next) => {
 
 router.get('patrocinador', autenticar, controller.getAll)
 router.post('patrocinador', autenticar, controller.newPatrocinador)
-router.post('patrocinador/administrador', controller.newAdmin)
+router.post('patrocinador/administrador', autenticar, controller.newAdmin)
 router.post('patrocinador/login', controller.login)
 router.patch('patrocinador/:id', autenticar, controller.update)
 router.delete('patrocinador/:id', autenticar, controller.remove)

@@ -3,7 +3,7 @@ const MONGO_URL = 'mongodb://localhost:27017/empreendemanas';
 
 function connect () {
   mongoose.connect(MONGO_URL,
-    { useNewUrlParser: true },
+    { useNewUrlParser: true , useUnifiedTopology: true },
     function (error) {
       if(error) {
         console.error("Ooops, mana! Temos um erro:", error)

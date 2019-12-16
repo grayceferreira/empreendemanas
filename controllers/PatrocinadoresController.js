@@ -94,10 +94,28 @@ const update = (request, response) => {
   )
 }
 
+const remove = (request, response) => {
+  const id = request.params.id
+
+  patrocinadoresModel.findByIdAndDelete(id, (error, patrocinador) => {
+    if (error) {
+      return response.status(500).send(error)
+    }
+
+    if (patrocinador) {
+      return response.status(200).send(id)
+    }
+
+    return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
+  })
+}
+
+
 module.exports = {
   getAll,
   newPatrocinador,
   newAdmin,
   login,
-  update
+  update,
+  remove
   }

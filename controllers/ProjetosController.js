@@ -13,7 +13,24 @@ connect()
     })
   }
 
+  const getById = (request, response) => {
+    const id = request.params.id
+  
+    return projetosModel.findById(id, (error, projeto) => {
+      if (error) {
+        return response.status(500).send(error)
+      }
+  
+      if (projeto) {
+        return response.status(200).send(projeto)
+      }
+  
+      return response.status(404).send('Projeto não encontrado!')
+    })
+  }
+
   module.exports = {
-    getAll
+    getAll,
+    getById
   }
 

@@ -18,7 +18,7 @@ const autenticar = (request, response, next) => {
     if (error) {
       autenticado = false
     } else {
-      if (decoded.permissao == 'comum' || decoded.permissao == 'admin') {
+      if (decoded.permissao == 'comum' || decoded.permissao == 'administrador') {
         autenticado = true
       } else {
         autenticado = false
@@ -47,7 +47,7 @@ const autenticarAdmin = (request, response, next) => {
     if (error) {
       autenticado = false
     } else {
-      if (decoded.permissao == 'admin') {
+      if (decoded.permissao == 'administrador') {
         autenticado = true
       } else {
         autenticado = false

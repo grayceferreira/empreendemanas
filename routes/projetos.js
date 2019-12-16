@@ -3,5 +3,6 @@ const router = express.Router();
 
 const controller = require("../controllers/ProjetosController")
 
+router.get('/projetos', controller.getAll)
 
-module.exports = route
+module.exports = router

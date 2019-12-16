@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const controller = require("../controllers/ServicosController")
+const controller = require("../controllers/ProjetosController")
 
 
 module.exports = route

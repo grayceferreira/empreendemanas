@@ -1,5 +1,5 @@
 const { connect } = require('../models/Repository')
-const { servicosModel } = require('../models/ServicosSchema')
+const { projetosModel } = require('../models/ProjetosSchema')
 
 connect()
 

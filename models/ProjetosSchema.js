@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const ServicosSchema = new Schema({
+const ProjetosSchema = new Schema({
   _id: { type: mongoose.Schema.Types.ObjectId, auto: true, required: true },
   nome: { type: String, required: true },
   descricao: { type: String, required: true },
@@ -10,6 +10,6 @@ const ServicosSchema = new Schema({
   categoria: { type: String, required: true }
 })
 
-const servicosModel = mongoose.model('servicos', ServicosSchema);
+const projetosModel = mongoose.model('projetos', ProjetosSchema);
 
-module.exports = { servicosModel, ServicosSchema };
+module.exports = { projetosModel, ProjetosSchema };

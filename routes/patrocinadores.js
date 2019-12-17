@@ -62,10 +62,10 @@ const autenticarAdmin = (request, response, next) => {
   next()
 }
 
-router.get('', autenticar, controller.getAll)
-router.post('', autenticar, controller.newPatrocinador)
+router.get('',  controller.getAll)
+router.post('',  controller.newPatrocinador)
 router.post('/login', controller.login)
-router.patch('/:id', autenticar, controller.update)
-router.delete('/:id', autenticar, controller.remove)
+router.patch('/:id',  controller.update)
+router.delete('/:id', controller.remove)
 
 module.exports = router

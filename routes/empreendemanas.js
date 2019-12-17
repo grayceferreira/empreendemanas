@@ -64,12 +64,12 @@ const autenticarAdmin = (request, response, next) => {
   next()
 }
 
-router.get('', autenticar, controller.getAll)
-router.post('', autenticar, controller.newEmpreendemana)
-router.delete('/:id', autenticar, controller.remove)
-router.patch('/:id', autenticar, controller.update)
+router.get('', controller.getAll)
+router.post('', controller.newEmpreendemana)
+router.delete('/:id', controller.remove)
+router.patch('/:id', controller.update)
 router.post('/login', controller.login)
-router.get('/projetos', autenticar, controller.getAllProjetos)
+router.get('/projetos', controller.getAllProjetos)
 
 
 module.exports = router

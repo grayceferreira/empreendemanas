@@ -9,7 +9,7 @@ connect()
 const newAdmin = (request, response) => {
     const senhaCriptografada = bcrypt.hashSync(request.body.senha)
     request.body.senha = senhaCriptografada
-    request.body.permissao = 'administrador' || 'comum'
+    request.body.permissao = 'administrador'
     const novoAdmin = new AdminModel(request.body)
   
     novoAdmin.save((error) => {
@@ -42,7 +42,7 @@ const newAdmin = (request, response) => {
       return response.status(401).send('Sua senha está incorreta!')
     }
   
-    return response.status(404).send('Ooops! Usuário não encontrado(a).')
+    return response.status(404).send('Ooops! Usuário(a) não encontrado(a).')
   }
 
   const remove = (request, response) => {
@@ -54,12 +54,13 @@ const newAdmin = (request, response) => {
       }
   
       if (admin) {
-        return response.status(200).send('Adminstradora apagada !')
+        return response.status(200).send('Usuário(a) deletado(a) com sucesso!')
       }
   
-      return response.status(404).send('Administradora não encontrado.')
+      return response.status(404).send('Usuário(a) não encontrado(a).')
     })
   }
+  
 
     const update = (request, response) => {
         const id = request.params.id
@@ -77,6 +78,8 @@ const newAdmin = (request, response) => {
       
         })
       }
+
+      
 
   module.exports = {
     login,

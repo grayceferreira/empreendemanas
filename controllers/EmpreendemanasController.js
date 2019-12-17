@@ -13,12 +13,10 @@ const getAllProjetos = (request, response) => {
     if (error) {
       return response.status(500).send(error)
     }
-
-    /*empreendemanas.map((item) => { */
       empreendemanas.map((index) => {
         arrayProjetos.push(index.projetos[0]) 
       })
-  
+      
     return response.status(200).send(arrayProjetos)
   })
 }

@@ -18,11 +18,12 @@ const autenticar = (request, response, next) => {
     if (error) {
       autenticado = false
     } else {
+      autenticado = true 
       if (decoded.permissao == 'comum' || decoded.permissao == 'administrador') {
         autenticado = true
       } else {
         autenticado = false
-      }
+      } 
     }
   })
 
@@ -44,6 +45,7 @@ const autenticarAdmin = (request, response, next) => {
   const token = authHeader.split(' ')[1]
 
   jwt.verify(token, SEGREDO, (error, decoded) => {
+    console.log(decoded)
     if (error) {
       autenticado = false
     } else {
@@ -64,9 +66,10 @@ const autenticarAdmin = (request, response, next) => {
 
 router.get('', autenticar, controller.getAll)
 router.post('', autenticar, controller.newEmpreendemana)
-router.post('/administrador', autenticar, controller.newAdmin)
 router.delete('/:id', autenticar, controller.remove)
 router.patch('/:id', autenticar, controller.update)
 router.post('/login', controller.login)
+router.get('/projetos', autenticar, controller.getAllProjetos)
+
 
 module.exports = router

@@ -32,21 +32,6 @@ const newPatrocinador = (request, response) => {
   })
 }
 
-const newAdmin = (request, response) => {
-  const senhaCriptografada = bcrypt.hashSync(request.body.senha)
-  request.body.senha = senhaCriptografada
-  request.body.permissao = 'administrador'
-  const novoPatrocinadorAdm = patrocinadoresModel(request.body)
-
-  novoPatrocinadorAdm.save((error) => {
-    if (error) {
-      return response.status(500).send(error)
-    }
-
-    return response.status(201).send(novoPatrocinadorAdm)
-  })
-}
-
 const login = async (request, response) => {
   const patrocinadorEncontrado = await patrocinadoresModel.findOne({ email: request.body.email })
 
@@ -68,7 +53,7 @@ const login = async (request, response) => {
     return response.status(401).send('Patrocinador(a), sua senha está incorreta!')
   }
 
-  return response.status(404).send('Ooops! Patrocinador não encontrado(a).')
+  return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
 }
 
 const update = (request, response) => {
@@ -103,7 +88,7 @@ const remove = (request, response) => {
     }
 
     if (patrocinador) {
-      return response.status(200).send(id)
+      return response.status(200).send('Patrocinador(a) removido(a) com sucesso!')
     }
 
     return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
@@ -114,7 +99,6 @@ const remove = (request, response) => {
 module.exports = {
   getAll,
   newPatrocinador,
-  newAdmin,
   login,
   update,
   remove

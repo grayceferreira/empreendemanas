@@ -7,6 +7,22 @@ const SEGREDO = 'MIICXAIBAAKBgQCOl54HaBM/WiL/jPPdFGjm9f8VprUst1J+vs7G/YRGRHYLGqt
 
 connect()
 
+const getAllProjetos = (request, response) => {
+  empreendemanasModel.find((error, empreendemanas) => {
+    const arrayProjetos = []
+    if (error) {
+      return response.status(500).send(error)
+    }
+
+    /*empreendemanas.map((item) => { */
+      empreendemanas.map((index) => {
+        arrayProjetos.push(index.projetos[0]) 
+      })
+  
+    return response.status(200).send(arrayProjetos)
+  })
+}
+
 const getAll = (request, response) => {
   empreendemanasModel.find((error, empreendemanas) => {
     if (error) {
@@ -32,20 +48,6 @@ const newEmpreendemana = (request, response) => {
   })
 }
 
-const newAdmin = (request, response) => {
-  const senhaCriptografada = bcrypt.hashSync(request.body.senha)
-  request.body.senha = senhaCriptografada
-  request.body.permissao = 'administrador'
-  const novaEmpreendemana = new empreendemanasModel(request.body)
-
-  novaEmpreendemana.save((error) => {
-    if (error) {
-      return response.status(500).send(error)
-    }
-
-    return response.status(201).send(novaEmpreendemana)
-  })
-}
 
 const login = async (request, response) => {
   const empreendemanaEncontrada = await empreendemanasModel.findOne({ email: request.body.email })
@@ -103,7 +105,7 @@ const remove = (request, response) => {
     }
 
     if (empreendemana) {
-      return response.status(200).send(id)
+      return response.status(200).send('Empreendemana deletada com sucesso!')
     }
 
     return response.status(404).send('Ooops! Não encontramos essa empreendemana.')
@@ -113,8 +115,8 @@ const remove = (request, response) => {
 
 module.exports = {
   getAll,
+  getAllProjetos,
   newEmpreendemana,
-  newAdmin,
   remove,
   update,
   login

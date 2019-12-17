@@ -6,7 +6,6 @@ const ProjetosSchema = new Schema({
   descricao: { type: String, required: true },
   foto: { type: String, required: true },
   valor: { type: Number, required: true },
-  pagamento: { type: String, required: true },
   categoria: { type: String, required: true }
 })
 

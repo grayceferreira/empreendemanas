@@ -24,13 +24,43 @@ A API está sendo escutada na `porta 3000`, dessa forma, para todas as rotas ser
 
 - POST `/empreendemanas/` - adicionar usuários 
 
+Exemplo:
+
+  {
+  "nome": "Grayce Delfe",
+  "email": "grayce@gmail.com",
+  "foto": "img.png",
+  "projetos": [
+  	{
+	"titulo": "Doces e Mimos Doceria",
+	"descricao": "Uma doceria diferente, com a intenção de vender mas também oferecer cursos a donas de casa de baixa renda da cidade de São Paulo.",
+	"valor": 900,
+	"categoria": "Comércio"
+	}	
+  	],
+  "senha": "senha123"
+  }
+
 - POST `/empreendemanas/login` - realizar login dos usuários
+
+Exemplo:
+
+{
+	"email": "grayce@gmail.com",
+	"senha": "senha123"
+}
 
 - GET `/empreendemanas` - visualizar todas as empreendemanas
 
 - GET `/empreendemanas/projetos` - visualizar todos os projetos existentes
 
 - PATCH `/empreendemanas/:id` - atualizar uma empreendemana através do ID
+
+Exemplo:
+
+{
+  "email": "grayce.de.deus.ferreira@gmail.com"
+}
 
 - DELETE `/empreendemanas/:id` - remover uma empreendemana e o projeto através do ID
 

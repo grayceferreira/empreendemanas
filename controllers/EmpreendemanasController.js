@@ -95,7 +95,8 @@ const update = (request, response) => {
 }
 
 const remove = (request, response) => {
-  const id = request.params.id
+  try {
+    const id = request.params.id
 
   empreendemanasModel.findByIdAndDelete(id, (error, empreendemana) => {
     if (error) {
@@ -108,6 +109,9 @@ const remove = (request, response) => {
 
     return response.status(404).send('Ooops! Não encontramos essa empreendemana.')
   })
+  } catch (err) {
+    return response.status(500).send({ message: "Ooops! Desculpe, tivemos um probleminha mas já estamos trabalhando para resolver!" })
+  }
 }
 
 

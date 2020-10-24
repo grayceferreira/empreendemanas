@@ -8,13 +8,15 @@ const SEGREDO = 'MIICXAIBAAKBgQCOl54HaBM/WiL/jPPdFGjm9f8VprUst1J+vs7G/YRGRHYLGqt
 connect()
 
 const getAll = (request, response) => {
-  patrocinadoresModel.find((error, patrocinadores) => {
+  try {patrocinadoresModel.find((error, patrocinadores) => {
     if (error) {
       return response.status(500).send(error)
     }
 
     return response.status(200).send(patrocinadores)
-  })
+  })} catch (err) {
+    return response.status(404).send({ message: "Patrocinador não encontrado!"})
+  }
 }
 
 const newPatrocinador = (request, response) => {

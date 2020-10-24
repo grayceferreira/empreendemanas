@@ -110,7 +110,6 @@ const remove = (request, response) => {
   })
 }
 
-
 module.exports = {
   getAll,
   getAllProjetos,

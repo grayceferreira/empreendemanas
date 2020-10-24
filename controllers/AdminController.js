@@ -48,7 +48,8 @@ const newAdmin = (request, response) => {
   const remove = (request, response) => {
     const id = request.params.id
   
-    AdminModel.findByIdAndDelete(id, (error, admin) => {
+    try {
+      AdminModel.findByIdAndDelete(id, (error, admin) => {
       if (error) {
         return response.status(500).send(error)
       }
@@ -59,6 +60,9 @@ const newAdmin = (request, response) => {
   
       return response.status(404).send('Usuário(a) não encontrado(a).')
     })
+  } catch (err) {
+    return response.status(404).send({ message: "Empreendemana a ser deletada não foi encontrada" })
+    }
   }
   
 

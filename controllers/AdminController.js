@@ -46,7 +46,7 @@ const newAdmin = (request, response) => {
   
     return response.status(404).send('Ooops! Usuário(a) não encontrado(a).')
     } catch (err) {
-      return res.status(424).send({ message: `O arquivo não pôde ser processado.`})
+      return response.status(424).send({ message: `O arquivo não pôde ser processado.`})
   }  
 
   }

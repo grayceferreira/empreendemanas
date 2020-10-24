@@ -7,7 +7,8 @@ const PatrocinadoresSchema = new Schema({
   email: { type: String, required: true },
   foto: { type: String, required: true },
   projetoSelecionado: [ProjetosSchema],
-  senha: { type: String, required: true }
+  senha: { type: String, required: true },
+  tipoDeEmpreendimento: { type: String, required: true }
 })
 
 const patrocinadoresModel = mongoose.model('patrocinadores', PatrocinadoresSchema);

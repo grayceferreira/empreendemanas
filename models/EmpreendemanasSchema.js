@@ -6,6 +6,7 @@ const EmpreendemanasSchema = new Schema({
   nome: { type: String, required: true },
   nickname:{type: String, required: false},
   email: { type: String, required: true },
+  telefone:{type:Number,required:true},
   foto: { type: String, required: true },
   projetos: [ProjetosSchema],
   senha: { type: String, required: true },

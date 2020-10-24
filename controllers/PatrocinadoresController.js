@@ -56,9 +56,8 @@ const login = async (request, response) => {
 
   return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
 } catch (err) {
-  return res.status(424).send({ message: `O arquivo não pôde ser processado.`})
+  return response.status(424).send({ message: `O arquivo não pôde ser processado.`})
 }
-
 }
 
 const update = (request, response) => {

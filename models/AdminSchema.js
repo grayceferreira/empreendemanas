@@ -3,8 +3,9 @@ const Schema = mongoose.Schema;
 
 const AdminSchema = new Schema({
   _id: { type: mongoose.Schema.Types.ObjectId, auto: true, required: true },
-  nome: { type: String, required: true },
+  name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
+  telefone:{type:Number,required:true},
   senha: { type: String, required: true },
 });
 

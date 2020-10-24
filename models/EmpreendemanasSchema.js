@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { ProjetosSchema } = require('./ProjetosSchema')
+const mongoose = require("mongoose");
+const { ProjetosSchema } = require("./ProjetosSchema");
 const Schema = mongoose.Schema;
 const EmpreendemanasSchema = new Schema({
   _id: { type: mongoose.Schema.Types.ObjectId, auto: true, required: true },
@@ -8,8 +8,12 @@ const EmpreendemanasSchema = new Schema({
   foto: { type: String, required: true },
   projetos: [ProjetosSchema],
   senha: { type: String, required: true },
-})
+  areaAtuacao: { type: String, required: true },
+});
 
-const empreendemanasModel = mongoose.model('empreendemanas', EmpreendemanasSchema);
+const empreendemanasModel = mongoose.model(
+  "empreendemanas",
+  EmpreendemanasSchema
+);
 
 module.exports = empreendemanasModel;

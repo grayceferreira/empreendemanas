@@ -57,26 +57,31 @@ const login = async (request, response) => {
 }
 
 const update = (request, response) => {
-  const id = request.params.id
-  const updatePatrocinador = request.body
-  const options = { new: true }
+  try {
+    const id = request.params.id
+    const updatePatrocinador = request.body
+    const options = { new: true }
 
-  patrocinadoresModel.findByIdAndUpdate(
-    id,
-    updatePatrocinador,
-    options,
-    (error, patrocinador) => {
-      if (error) {
-        return response.status(500).send(error)
+
+    patrocinadoresModel.findByIdAndUpdate(
+      id,
+      updatePatrocinador,
+      options,
+      (error, patrocinador) => {
+        if (error) {
+          return response.status(500).send(error)
+        }
+
+        if (patrocinador) {
+          return response.status(200).send(patrocinador)
+        }
+
+        return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
       }
-
-      if (patrocinador) {
-        return response.status(200).send(patrocinador)
-      }
-
-      return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
+    )} catch(err) {
+      console.log(err)
+      return res.status(424).send({ message: "O arquivo não pôde ser atualizado" });
     }
-  )
 }
 
 const remove = (request, response) => {

@@ -9,6 +9,7 @@ const EmpreendemanasSchema = new Schema({
   projetos: [ProjetosSchema],
   senha: { type: String, required: true },
   areaAtuacao: { type: String, required: true },
+  estadoCivil: { type: String, required: true },
 });
 
 const empreendemanasModel = mongoose.model(

@@ -21,7 +21,7 @@ const getAllProjetos = (request, response) => {
     return response.status(200).send(arrayProjetos)
   })} 
   catch(err){
-    return response.status(404).send('Ooops! Projetos não encontrados.')
+    return response.status(424).send({ message: `O arquivo não pôde ser processado.`})
 }
   }
 

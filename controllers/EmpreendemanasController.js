@@ -110,7 +110,7 @@ const remove = (request, response) => {
     return response.status(404).send('Ooops! Não encontramos essa empreendemana.')
   })
   } catch (err) {
-    return response.status(500).send({ message: "Ooops! Desculpe, tivemos um probleminha mas já estamos trabalhando para resolver!" })
+    return response.status(424).send({ message: "Ooops, não foi possível exibir esta página." })
   }
 }
 

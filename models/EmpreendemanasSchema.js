@@ -8,8 +8,10 @@ const EmpreendemanasSchema = new Schema({
   foto: { type: String, required: true },
   projetos: [ProjetosSchema],
   senha: { type: String, required: true },
+  cpf: { type: Number, required: true }
 })
 
 const empreendemanasModel = mongoose.model('empreendemanas', EmpreendemanasSchema);
 
 module.exports = empreendemanasModel;
+

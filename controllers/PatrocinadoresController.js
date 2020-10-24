@@ -93,7 +93,7 @@ const remove = (request, response) => {
 
     return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
   })} catch(err){ 
-    return response.status(404).send('Ooops! Patrocinador(a) não encontrados.')
+    return response.status(424).send({ message: "O arquivo não pôde ser atualizado" })
   }
 }
 

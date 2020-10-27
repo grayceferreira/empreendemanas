@@ -85,11 +85,11 @@ OU
 4. Após realizar as modificações, use o comando (`git add .`)
 5. Faça o _commit_ (`git commit -m 'Digite sua mensagem aqui'`)
 6. _Push_ (`git push --set-upstream origin feature/nome-da-sua-branch`)
-7. Crie um novo _Pull Request_ para a _branch_ `feature/develop`
-
+7. Crie um novo _Pull Request_ para a _branch_ `feature/develop`  
 
 
 [![reprograma](https://reprograma.com.br/assets/img/logo-fundoclaro.png)](https://www.reprograma.com.br/)
+
 
 [![aboutme](https://instagram.fgru5-1.fna.fbcdn.net/v/t51.2885-19/s320x320/104238218_665572650691590_4782080953289122449_n.jpg?_nc_ht=instagram.fgru5-1.fna.fbcdn.net&_nc_ohc=lQpMGS09FcsAX_3cjBZ&oh=eebda7ec29fdcf0de68bbd146bfeedd6&oe=5FB6A2D3)](https://linktr.ee/grayce.ferreira)
 

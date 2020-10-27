@@ -81,8 +81,8 @@ const update = (request, response) => {
 
 const remove = (request, response) => {
   const id = request.params.id
-
-  patrocinadoresModel.findByIdAndDelete(id, (error, patrocinador) => {
+  
+  try{patrocinadoresModel.findByIdAndDelete(id, (error, patrocinador) => {
     if (error) {
       return response.status(500).send(error)
     }
@@ -92,7 +92,9 @@ const remove = (request, response) => {
     }
 
     return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
-  })
+  })} catch(err){ 
+    return response.status(424).send({ message: "O arquivo não pôde ser atualizado" })
+  }
 }
 
 

@@ -68,8 +68,10 @@ Exemplo:
 ### Contribuindo com o projeto para o Hacktoberfest 2020
 
 1. Faça o _fork_ do projeto (<https://github.com/grayceferreira/empreendemanas/fork>)
-2. Mude para a _branch_ para realizar suas modificações (`git checkout feature/hacktoberfest`)
-3. Faça o _commit_ (`git commit -m 'Digite sua mensagem aqui'`)
+2. Faça o _checkout_ na branch master (`git checkout master`)
+3. Crie uma _branch_ para realizar suas modificações (`git checkout -b feature/nome-da-sua-branch`)
+4. Após realizar as modificações, use o comando (`git add .`)
+4. Faça o _commit_ (`git commit -m 'Digite sua mensagem aqui'`)
 4. _Push_ (`git push origin feature/hacktoberfest`)
 5. Crie um novo _Pull Request_
 

@@ -35,7 +35,8 @@ const newPatrocinador = (request, response) => {
 const login = async (request, response) => {
   const patrocinadorEncontrado = await patrocinadoresModel.findOne({ email: request.body.email })
 
-  if (patrocinadorEncontrado) {
+  try {
+    if (patrocinadorEncontrado) {
     const senhaCorreta = bcrypt.compareSync(request.body.senha, patrocinadorEncontrado.senha)
 
     if (senhaCorreta) {
@@ -54,35 +55,43 @@ const login = async (request, response) => {
   }
 
   return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
+} catch (err) {
+  return response.status(424).send({ message: `O arquivo não pôde ser processado.`})
+}
 }
 
 const update = (request, response) => {
-  const id = request.params.id
-  const updatePatrocinador = request.body
-  const options = { new: true }
+  try {
+    const id = request.params.id
+    const updatePatrocinador = request.body
+    const options = { new: true }
 
-  patrocinadoresModel.findByIdAndUpdate(
-    id,
-    updatePatrocinador,
-    options,
-    (error, patrocinador) => {
-      if (error) {
-        return response.status(500).send(error)
+
+    patrocinadoresModel.findByIdAndUpdate(
+      id,
+      updatePatrocinador,
+      options,
+      (error, patrocinador) => {
+        if (error) {
+          return response.status(500).send(error)
+        }
+
+        if (patrocinador) {
+          return response.status(200).send(patrocinador)
+        }
+
+        return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
       }
-
-      if (patrocinador) {
-        return response.status(200).send(patrocinador)
-      }
-
-      return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
+    )} catch(err) {
+      console.log(err)
+      return res.status(424).send({ message: "O arquivo não pôde ser atualizado" });
     }
-  )
 }
 
 const remove = (request, response) => {
   const id = request.params.id
-
-  patrocinadoresModel.findByIdAndDelete(id, (error, patrocinador) => {
+  
+  try{patrocinadoresModel.findByIdAndDelete(id, (error, patrocinador) => {
     if (error) {
       return response.status(500).send(error)
     }
@@ -92,7 +101,9 @@ const remove = (request, response) => {
     }
 
     return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
-  })
+  })} catch(err){ 
+    return response.status(424).send({ message: "O arquivo não pôde ser atualizado" })
+  }
 }
 
 

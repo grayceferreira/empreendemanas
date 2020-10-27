@@ -35,7 +35,8 @@ const newPatrocinador = (request, response) => {
 const login = async (request, response) => {
   const patrocinadorEncontrado = await patrocinadoresModel.findOne({ email: request.body.email })
 
-  if (patrocinadorEncontrado) {
+  try {
+    if (patrocinadorEncontrado) {
     const senhaCorreta = bcrypt.compareSync(request.body.senha, patrocinadorEncontrado.senha)
 
     if (senhaCorreta) {
@@ -54,6 +55,9 @@ const login = async (request, response) => {
   }
 
   return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
+} catch (err) {
+  return response.status(424).send({ message: `O arquivo não pôde ser processado.`})
+}
 }
 
 const update = (request, response) => {

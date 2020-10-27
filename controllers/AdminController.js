@@ -19,11 +19,13 @@ const newAdmin = (request, response) => {
   
       return response.status(201).send(novoAdmin)
     })
+    
   }
 
   const login = async (request, response) => {
     const adminEncontrado = await AdminModel.findOne({ email: request.body.email })
   
+    try {
     if (adminEncontrado) {
       const senhaCorreta = bcrypt.compareSync(request.body.senha, adminEncontrado.senha)
   
@@ -43,6 +45,10 @@ const newAdmin = (request, response) => {
     }
   
     return response.status(404).send('Ooops! Usuário(a) não encontrado(a).')
+    } catch (err) {
+      return response.status(424).send({ message: `O arquivo não pôde ser processado.`})
+  }  
+
   }
 
   const remove = (request, response) => {

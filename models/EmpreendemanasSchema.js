@@ -8,6 +8,7 @@ const EmpreendemanasSchema = new Schema({
   foto: { type: String, required: true },
   projetos: [ProjetosSchema],
   senha: { type: String, required: true },
+  idade: { type: Number, required: true }
 })
 
 const empreendemanasModel = mongoose.model('empreendemanas', EmpreendemanasSchema);

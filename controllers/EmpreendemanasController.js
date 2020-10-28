@@ -9,6 +9,7 @@ const SEGREDO =
 connect();
 
 const getAllProjetos = (request, response) => {
+
   empreendemanasModel.find((error, empreendemanas) => {
     const arrayProjetos = [];
     if (error) {
@@ -23,6 +24,7 @@ const getAllProjetos = (request, response) => {
 };
 
 const getAll = (request, response) => {
+
   empreendemanasModel.find((error, empreendemanas) => {
     if (error) {
       return response.status(500).send(error);
@@ -38,8 +40,7 @@ const newEmpreendemana = (request, response) => {
   request.body.permissao = "comum";
   const novaEmpreendemana = new empreendemanasModel(request.body);
 
-  novaEmpreendemana.save((error) => {
-    if (error) {
+  if (error) {
       return response.status(500).send(error);
     }
 
@@ -58,12 +59,12 @@ const login = async (request, response) => {
       empreendemanaEncontrada.senha
     );
 
-    if (senhaCorreta) {
+    if (correctPassword) {
       const token = jwt.sign(
         {
           permissao: empreendemanaEncontrada.permissao,
         },
-        SEGREDO,
+        SECRET_KEY,
         { expiresIn: 6000 }
       );
 
@@ -81,7 +82,7 @@ const update = (request, response) => {
   const updateEmpreendemana = request.body;
   const options = { new: true };
 
-  empreendemanasModel.findByIdAndUpdate(
+  try { empreendemanasModel.findByIdAndUpdate(
     id,
     updateEmpreendemana,
     options,
@@ -102,7 +103,7 @@ const update = (request, response) => {
 const remove = (request, response) => {
   const id = request.params.id;
 
-  empreendemanasModel.findByIdAndDelete(id, (error, empreendemana) => {
+  try {empreendemanasModel.findByIdAndDelete(id, (error, empreendemana) => {
     if (error) {
       return response.status(500).send(error);
     }

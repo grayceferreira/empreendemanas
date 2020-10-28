@@ -15,7 +15,8 @@ const EmpreendemanasSchema = new Schema({
   estadoCivil: { type: String, required: true },
   cpf: { type: Number, required: true },
   idade: { type: Number, required: true },
-  tamanhoDaCamisa: { type: Number, required: true }
+  tamanhoDaCamisa: { type: Number, required: true },
+  cidade: {type: String, required:true}
 });
 
 const empreendemanasModel = mongoose.model(

@@ -37,7 +37,7 @@ const getAll = (request, response) => {
 
 const newEmpreendemana = (request, response) => {
   const senhaCriptografada = bcrypt.hashSync(request.body.senha)
-  request.body.senha = senhaCriptografada
+ try { request.body.senha = senhaCriptografada
   request.body.permissao = 'comum'
   const novaEmpreendemana = new empreendemanasModel(request.body)
 
@@ -46,10 +46,10 @@ const newEmpreendemana = (request, response) => {
       return response.status(500).send(error)
     }
 
-    return response.status(201).send(novaEmpreendemana)
-  })
+    return response.status(201).send(novaEmpreendemana)})} catch {
+      return response.status (404).send ({message: "Nova empreendedora não pode ser adicionada"})
+    }
 }
-
 
 const login = async (request, response) => {
   const empreendemanaEncontrada = await empreendemanasModel.findOne({ email: request.body.email })

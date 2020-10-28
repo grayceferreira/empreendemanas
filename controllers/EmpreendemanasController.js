@@ -112,11 +112,9 @@ const remove = (request, response) => {
       return response.status(200).send("Empreendemana deletada com sucesso!");
     }
 
-    return response
-      .status(404)
-      .send("Ooops! Não encontramos essa empreendemana.");
-  });
-};
+    return response.status(404).send('Ooops! Não encontramos essa empreendemana.')
+  })
+}
 
 module.exports = {
   getAll,

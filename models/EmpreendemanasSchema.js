@@ -6,9 +6,11 @@ const EmpreendemanasSchema = new Schema({
   nome: { type: String, required: true },
   email: { type: String, required: true },
   rg: { type: Number, required: true},
+  telefone: { type: String, required: true },
   foto: { type: String, required: true },
   projetos: [ProjetosSchema],
   senha: { type: String, required: true },
+  idade: { type: Number, required: true }
 })
 
 const empreendemanasModel = mongoose.model('empreendemanas', EmpreendemanasSchema);

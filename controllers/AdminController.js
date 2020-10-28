@@ -18,7 +18,6 @@ const newAdmin = (request, response) => {
       if (error) {
         return response.status(424).send({ message: "Error adding administrator"});
       }
-
       return response.status(201).send(registeredAdmin);
     });
   } catch {
@@ -48,7 +47,6 @@ const login = async (request, response) => {
 
       return response.status(200).send({ token });
     }
-
     return response.status(401).send("Your password is incorrect!");
   }
 

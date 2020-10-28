@@ -8,8 +8,9 @@ const PatrocinadoresSchema = new Schema({
   foto: { type: String, required: true },
   projetoSelecionado: [ProjetosSchema],
   senha: { type: String, required: true },
-  tipoDeEmpreendimento: { type: String, required: true },
-  interesseEmInvestir: { type: Boolean, required: true }
+   tipoDeEmpreendimento: { type: String, required: true },
+  interesseEmInvestir: { type: Boolean, required: true },
+  areaDeInteresse: { type: String, required: true }
 })
 
 const patrocinadoresModel = mongoose.model('patrocinadores', PatrocinadoresSchema);

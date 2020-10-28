@@ -57,32 +57,36 @@ const login = async (request, response) => {
 }
 
 const update = (request, response) => {
-  const id = request.params.id
-  const updatePatrocinador = request.body
-  const options = { new: true }
+  try {
+    const id = request.params.id
+    const updatePatrocinador = request.body
+    const options = { new: true }
 
-  patrocinadoresModel.findByIdAndUpdate(
-    id,
-    updatePatrocinador,
-    options,
-    (error, patrocinador) => {
-      if (error) {
-        return response.status(500).send(error)
-      }
 
-      if (patrocinador) {
-        return response.status(200).send(patrocinador)
+    patrocinadoresModel.findByIdAndUpdate(
+      id,
+      updatePatrocinador,
+      options,
+      (error, patrocinador) => {
+        if (error) {
+          return response.status(500).send(error)
+        }
+
+        if (patrocinador) {
+          return response.status(200).send(patrocinador)
+        }
+
+        return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
       }
 
       return response.status(404).send('Ooops! Sponsor not found.')
     }
-  )
 }
 
 const remove = (request, response) => {
   const id = request.params.id
-
-  patrocinadoresModel.findByIdAndDelete(id, (error, patrocinador) => {
+  
+  try{patrocinadoresModel.findByIdAndDelete(id, (error, patrocinador) => {
     if (error) {
       return response.status(500).send(error)
     }
@@ -90,7 +94,6 @@ const remove = (request, response) => {
     if (patrocinador) {
       return response.status(200).send('Sponsor removed successfully!')
     }
-
     return response.status(404).send('Ooops! Sponsor not found.')
   })
 }

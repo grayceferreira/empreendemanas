@@ -1,0 +1,7 @@
+## Sugestões de Melhoria ##
+
+- Inserir um projeto separadamente do cadastro de nova empreendemana;
+- Inserir mais campos no cadastro de empreendemanas;
+- Completar cadastro do patrocinador;
+- Opção de atualização de cadastro e exclusão de patrocinador;
+- Associar um patrocinador a um projeto existente;

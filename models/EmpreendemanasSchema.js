@@ -11,6 +11,7 @@ const EmpreendemanasSchema = new Schema({
   projetos: [ProjetosSchema],
   senha: { type: String, required: true },
   areaAtuacao: { type: String, required: true },
+  estadoCivil: { type: String, required: true },
   cpf: { type: Number, required: true },
   idade: { type: Number, required: true }
 });

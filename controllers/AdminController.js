@@ -8,38 +8,35 @@ const SEGREDO =
 connect();
 
 const newAdmin = (request, response) => {
-  const encryptedPassword = bcrypt.hashSync(request.body.senha);
-  request.body.senha = encryptedPassword;
+  const senhaCriptografada = bcrypt.hashSync(request.body.senha);
+  request.body.senha = senhaCriptografada;
   request.body.permissao = "administrador";
-  const registeredAdmin = new AdminModel(request.body);
+  const novoAdmin = new AdminModel(request.body);
 
-  try {
-    registeredAdmin.save((error) => {
-      if (error) {
-        return response.status(424).send({ message: "Error adding administrator"});
-      }
-      return response.status(201).send(registeredAdmin);
-    });
-  } catch {
-    res.status(500).send({ message: "Internal server error" });
-  }
+  novoAdmin.save((error) => {
+    if (error) {
+      return response.status(500).send(error);
+    }
+
+    return response.status(201).send(novoAdmin);
+  });
 };
 
 const login = async (request, response) => {
-  const adminFound = await AdminModel.findOne({
+  const adminEncontrado = await AdminModel.findOne({
     email: request.body.email,
   });
 
-  if (adminFound) {
-    const correctPassword = bcrypt.compareSync(
+  if (adminEncontrado) {
+    const senhaCorreta = bcrypt.compareSync(
       request.body.senha,
-      adminFound.senha
+      adminEncontrado.senha
     );
 
-    if (correctPassword) {
+    if (senhaCorreta) {
       const token = jwt.sign(
         {
-          permissao: adminFound.permissao,
+          permissao: adminEncontrado.permissao,
         },
         SEGREDO,
         { expiresIn: 6000 }
@@ -47,10 +44,11 @@ const login = async (request, response) => {
 
       return response.status(200).send({ token });
     }
-    return response.status(401).send("Your password is incorrect!");
+
+    return response.status(401).send("Sua senha está incorreta!");
   }
 
-  return response.status(404).send("Ooops! User not found.");
+  return response.status(404).send("Ooops! Usuário(a) não encontrado(a).");
 };
 
 const remove = (request, response) => {
@@ -62,10 +60,10 @@ const remove = (request, response) => {
     }
 
     if (admin) {
-      return response.status(200).send("User successfully deleted!");
+      return response.status(200).send("Usuário(a) deletado(a) com sucesso!");
     }
 
-    return response.status(404).send("User not found.");
+    return response.status(404).send("Usuário(a) não encontrado(a).");
   });
 };
 
@@ -91,3 +89,4 @@ module.exports = {
   remove,
   update,
 };
+

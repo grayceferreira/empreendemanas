@@ -115,9 +115,8 @@ const remove = (request, response) => {
     }
 
     return response.status(404).send('Ooops! Não encontramos essa empreendemana.')
-  })
-  } catch (err) {
-    return response.status(424).send({ message: "Ooops, não foi possível exibir esta página." })
+  })} catch (err) {
+    return response.status(404).send({ message: "Empreendemana a ser deletada não foi encontrada! :("})
   }
 }
 

@@ -8,7 +8,8 @@ const SEGREDO = 'MIICXAIBAAKBgQCOl54HaBM/WiL/jPPdFGjm9f8VprUst1J+vs7G/YRGRHYLGqt
 connect()
 
 const getAllProjetos = (request, response) => {
-  empreendemanasModel.find((error, empreendemanas) => {
+
+ try { empreendemanasModel.find((error, empreendemanas) => {
     const arrayProjetos = []
     if (error) {
       return response.status(500).send(error)
@@ -18,8 +19,11 @@ const getAllProjetos = (request, response) => {
       })
       
     return response.status(200).send(arrayProjetos)
-  })
+  })} 
+  catch(err){
+    return response.status(424).send({ message: `O arquivo não pôde ser processado.`})
 }
+  }
 
 const getAll = (request, response) => {
   empreendemanasModel.find((error, empreendemanas) => {

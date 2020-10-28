@@ -80,7 +80,6 @@ const newAdmin = (request, response) => {
       }
 
       
-
   module.exports = {
     login,
     newAdmin,

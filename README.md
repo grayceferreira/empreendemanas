@@ -24,7 +24,31 @@ A API está sendo escutada na `porta 3000`, dessa forma, para todas as rotas ser
 
 - POST `/empreendemanas/` - adicionar usuários 
 
+Exemplo:
+
+  {
+  "nome": "Grayce Delfe",
+  "email": "grayce@gmail.com",
+  "foto": "img.png",
+  "projetos": [
+  	{
+	"titulo": "Doces e Mimos Doceria",
+	"descricao": "Uma doceria diferente, com a intenção de vender mas também oferecer cursos a donas de casa de baixa renda da cidade de São Paulo.",
+	"valor": 900,
+	"categoria": "Comércio"
+	}	
+  	],
+  "senha": "senha123"
+  }
+
 - POST `/empreendemanas/login` - realizar login dos usuários
+
+Exemplo:
+
+{
+	"email": "grayce@gmail.com",
+	"senha": "senha123"
+}
 
 - GET `/empreendemanas` - visualizar todas as empreendemanas
 
@@ -32,14 +56,22 @@ A API está sendo escutada na `porta 3000`, dessa forma, para todas as rotas ser
 
 - PATCH `/empreendemanas/:id` - atualizar uma empreendemana através do ID
 
+Exemplo:
+
+{
+  "email": "grayce.de.deus.ferreira@gmail.com"
+}
+
 - DELETE `/empreendemanas/:id` - remover uma empreendemana e o projeto através do ID
 
 
 ### Contribuindo com o projeto para o Hacktoberfest 2020
 
 1. Faça o _fork_ do projeto (<https://github.com/grayceferreira/empreendemanas/fork>)
-2. Mude para a _branch_ para realizar suas modificações (`git checkout feature/hacktoberfest`)
-3. Faça o _commit_ (`git commit -m 'Digite sua mensagem aqui'`)
+2. Faça o _checkout_ na branch master (`git checkout master`)
+3. Crie uma _branch_ para realizar suas modificações (`git checkout -b feature/nome-da-sua-branch`)
+4. Após realizar as modificações, use o comando (`git add .`)
+4. Faça o _commit_ (`git commit -m 'Digite sua mensagem aqui'`)
 4. _Push_ (`git push origin feature/hacktoberfest`)
 5. Crie um novo _Pull Request_
 

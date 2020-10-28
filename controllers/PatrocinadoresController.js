@@ -8,30 +8,32 @@ const SEGREDO = 'MIICXAIBAAKBgQCOl54HaBM/WiL/jPPdFGjm9f8VprUst1J+vs7G/YRGRHYLGqt
 connect()
 
 const getAll = (request, response) => {
-  try {patrocinadoresModel.find((error, patrocinadores) => {
+  patrocinadoresModel.find((error, patrocinadores) => {
     if (error) {
       return response.status(500).send(error)
     }
 
     return response.status(200).send(patrocinadores)
-  })} catch (err) {
-    return response.status(404).send({ message: "Patrocinador não encontrado!"})
-  }
+  })
 }
 
 const newPatrocinador = (request, response) => {
-  const senhaCriptografada = bcrypt.hashSync(request.body.senha)
-  request.body.senha = senhaCriptografada
-  request.body.permissao = 'comum'
-  const novoPatrocinador = new patrocinadoresModel(request.body)
+  try {
+    const senhaCriptografada = bcrypt.hashSync(request.body.senha)
+    request.body.senha = senhaCriptografada
+    request.body.permissao = 'comum'
+    const novoPatrocinador = new patrocinadoresModel(request.body)
 
-  novoPatrocinador.save((error) => {
-    if (error) {
-      return response.status(500).send(error)
-    }
+    novoPatrocinador.save((error) => {
+      if (error) {
+        return response.status(500).send(error)
+      }
 
-    return response.status(201).send(novoPatrocinador)
-  })
+      return response.status(201).send(novoPatrocinador)
+    })
+  } catch (err) {
+    return response.status(424).send({ message: "Ooops, não foi possível processar esta página."})
+  }
 }
 
 const login = async (request, response) => {

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const AdminSchema = new Schema({
@@ -9,6 +9,6 @@ const AdminSchema = new Schema({
     areaDeAtuacao: { type: String, required: true}
   })
 
-  const AdminModel = mongoose.model('Admin', AdminSchema)
+const AdminModel = mongoose.model("Admin", AdminSchema);
 
-  module.exports = { AdminModel }
+module.exports = { AdminModel };

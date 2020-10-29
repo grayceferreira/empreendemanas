@@ -71,19 +71,21 @@ Exemplo:
 2. Faça o _checkout_ na branch master (`git checkout master`)
 3. Crie uma _branch_ para realizar suas modificações (`git checkout -b feature/nome-da-sua-branch`)
 4. Após realizar as modificações, use o comando (`git add .`)
-4. Faça o _commit_ (`git commit -m 'Digite sua mensagem aqui'`)
-4. _Push_ (`git push origin feature/hacktoberfest`)
-5. Crie um novo _Pull Request_
+5. Faça o _commit_ (`git commit -m 'Digite sua mensagem aqui'`)
+6. _Push_ (`git push --set-upstream origin feature/nome-da-sua-branch`)
+7. Crie um novo _Pull Request_ para a _branch_ `feature/hacktoberfest`
 
 OU
 
 ### Contribuindo com o projeto
 
 1. Faça o _fork_ do projeto (<https://github.com/grayceferreira/empreendemanas/fork>)
-2. Crie uma _branch_ para sua modificação (`git checkout -b feature/sua-branch`)
-3. Faça o _commit_ (`git commit -m 'Digite sua mensagem aqui'`)
-4. _Push_ (`git push origin feature/sua-branch`)
-5. Crie um novo _Pull Request_
+2. Faça o _checkout_ na branch master (`git checkout master`)
+3. Crie uma _branch_ para realizar suas modificações (`git checkout -b feature/nome-da-sua-branch`)
+4. Após realizar as modificações, use o comando (`git add .`)
+5. Faça o _commit_ (`git commit -m 'Digite sua mensagem aqui'`)
+6. _Push_ (`git push --set-upstream origin feature/nome-da-sua-branch`)
+7. Crie um novo _Pull Request_ para a _branch_ `feature/develop`
 
 
 

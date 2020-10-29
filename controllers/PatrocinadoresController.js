@@ -34,64 +34,58 @@ const newPatrocinador = (request, response) => {
 
 const login = async (request, response) => {
   const patrocinadorEncontrado = await patrocinadoresModel.findOne({ email: request.body.email })
-
   try {
     if (patrocinadorEncontrado) {
-    const senhaCorreta = bcrypt.compareSync(request.body.senha, patrocinadorEncontrado.senha)
+      const senhaCorreta = bcrypt.compareSync(request.body.senha, patrocinadorEncontrado.senha)
 
-    if (senhaCorreta) {
-      const token = jwt.sign(
-        {
-          permissao: patrocinadorEncontrado.permissao
-        },
-        SEGREDO,
-        { expiresIn: 6000 }
-      )
+      if (senhaCorreta) {
+        const token = jwt.sign(
+          {
+            permissao: patrocinadorEncontrado.permissao
+          },
+          SEGREDO,
+          { expiresIn: 6000 }
+        )
 
-      return response.status(200).send({ token })
+        return response.status(200).send({ token })
+      }
+
+      return response.status(401).send('Patrocinador(a), sua senha está incorreta!')
     }
 
-    return response.status(401).send('Patrocinador(a), sua senha está incorreta!')
-  }
-
-  return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
-} catch (err) {
-  return response.status(424).send({ message: `O arquivo não pôde ser processado.`})
-}
+    return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
+  } catch (err) {
+    return response.status(424).send({ message: `O arquivo não pôde ser processado.`})
+    }
 }
 
 const update = (request, response) => {
-  try {
-    const id = request.params.id
-    const updatePatrocinador = request.body
-    const options = { new: true }
+  const id = request.params.id
+  const updatePatrocinador = request.body
+  const options = { new: true }
 
-
-    patrocinadoresModel.findByIdAndUpdate(
-      id,
-      updatePatrocinador,
-      options,
-      (error, patrocinador) => {
-        if (error) {
-          return response.status(500).send(error)
-        }
-
-        if (patrocinador) {
-          return response.status(200).send(patrocinador)
-        }
-
-        return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
+  patrocinadoresModel.findByIdAndUpdate(
+    id,
+    updatePatrocinador,
+    options,
+    (error, patrocinador) => {
+      if (error) {
+        return response.status(500).send(error)
       }
-    )} catch(err) {
-      console.log(err)
-      return res.status(424).send({ message: "O arquivo não pôde ser atualizado" });
+
+      if (patrocinador) {
+        return response.status(200).send(patrocinador)
+      }
+
+      return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
     }
+  )
 }
 
 const remove = (request, response) => {
   const id = request.params.id
-  
-  try{patrocinadoresModel.findByIdAndDelete(id, (error, patrocinador) => {
+
+  patrocinadoresModel.findByIdAndDelete(id, (error, patrocinador) => {
     if (error) {
       return response.status(500).send(error)
     }
@@ -101,9 +95,7 @@ const remove = (request, response) => {
     }
 
     return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
-  })} catch(err){ 
-    return response.status(424).send({ message: "O arquivo não pôde ser atualizado" })
-  }
+  })
 }
 
 

@@ -18,46 +18,45 @@ const getAll = (request, response) => {
 }
 
 const newPatrocinador = (request, response) => {
-  try {
-    const senhaCriptografada = bcrypt.hashSync(request.body.senha)
-    request.body.senha = senhaCriptografada
-    request.body.permissao = 'comum'
-    const novoPatrocinador = new patrocinadoresModel(request.body)
+  const senhaCriptografada = bcrypt.hashSync(request.body.senha)
+  request.body.senha = senhaCriptografada
+  request.body.permissao = 'comum'
+  const novoPatrocinador = new patrocinadoresModel(request.body)
 
-    novoPatrocinador.save((error) => {
-      if (error) {
-        return response.status(500).send(error)
-      }
+  novoPatrocinador.save((error) => {
+    if (error) {
+      return response.status(500).send(error)
+    }
 
-      return response.status(201).send(novoPatrocinador)
-    })
-  } catch (err) {
-    return response.status(424).send({ message: "Ooops, não foi possível processar esta página."})
-  }
+    return response.status(201).send(novoPatrocinador)
+  })
 }
 
 const login = async (request, response) => {
   const patrocinadorEncontrado = await patrocinadoresModel.findOne({ email: request.body.email })
+  try {
+    if (patrocinadorEncontrado) {
+      const senhaCorreta = bcrypt.compareSync(request.body.senha, patrocinadorEncontrado.senha)
 
-  if (patrocinadorEncontrado) {
-    const senhaCorreta = bcrypt.compareSync(request.body.senha, patrocinadorEncontrado.senha)
+      if (senhaCorreta) {
+        const token = jwt.sign(
+          {
+            permissao: patrocinadorEncontrado.permissao
+          },
+          SEGREDO,
+          { expiresIn: 6000 }
+        )
 
-    if (senhaCorreta) {
-      const token = jwt.sign(
-        {
-          permissao: patrocinadorEncontrado.permissao
-        },
-        SEGREDO,
-        { expiresIn: 6000 }
-      )
+        return response.status(200).send({ token })
+      }
 
-      return response.status(200).send({ token })
+      return response.status(401).send('Patrocinador(a), sua senha está incorreta!')
     }
 
-    return response.status(401).send('Patrocinador(a), sua senha está incorreta!')
-  }
-
-  return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
+    return response.status(404).send('Ooops! Patrocinador(a) não encontrado(a).')
+  } catch (err) {
+    return response.status(424).send({ message: `O arquivo não pôde ser processado.`})
+    }
 }
 
 const update = (request, response) => {

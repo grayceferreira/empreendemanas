@@ -23,33 +23,36 @@ const newAdmin = (request, response) => {
 
   const login = async (request, response) => {
     const adminEncontrado = await AdminModel.findOne({ email: request.body.email })
-  
-    if (adminEncontrado) {
-      const senhaCorreta = bcrypt.compareSync(request.body.senha, adminEncontrado.senha)
-  
-      if (senhaCorreta) {
-        const token = jwt.sign(
-          {
-            permissao: adminEncontrado.permissao
-          },
-          SEGREDO,
-          { expiresIn: 6000 }
-        )
-  
-        return response.status(200).send({ token })
+    try {
+      if (adminEncontrado) {
+        const senhaCorreta = bcrypt.compareSync(request.body.senha, adminEncontrado.senha)
+    
+        if (senhaCorreta) {
+          const token = jwt.sign(
+            {
+              permissao: adminEncontrado.permissao
+            },
+            SEGREDO,
+            { expiresIn: 6000 }
+          )
+    
+          return response.status(200).send({ token })
+        }
+    
+        return response.status(401).send('Sua senha está incorreta!')
       }
-  
-      return response.status(401).send('Sua senha está incorreta!')
-    }
-  
-    return response.status(404).send('Ooops! Usuário(a) não encontrado(a).')
+    
+      return response.status(404).send('Ooops! Usuário(a) não encontrado(a).')
+  } catch (err) {
+      return response.status(424).send({ message: `O arquivo não pôde ser processado.`})
+    } 
   }
+
 
   const remove = (request, response) => {
     const id = request.params.id
   
-    try {
-      AdminModel.findByIdAndDelete(id, (error, admin) => {
+    AdminModel.findByIdAndDelete(id, (error, admin) => {
       if (error) {
         return response.status(500).send(error)
       }
@@ -60,9 +63,6 @@ const newAdmin = (request, response) => {
   
       return response.status(404).send('Usuário(a) não encontrado(a).')
     })
-  } catch (err) {
-    return response.status(404).send({ message: "Empreendemana a ser deletada não foi encontrada" })
-    }
   }
   
 
@@ -91,4 +91,3 @@ const newAdmin = (request, response) => {
     remove,
     update
     }
-
